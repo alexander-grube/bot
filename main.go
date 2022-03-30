@@ -25,11 +25,11 @@ func main() {
 		_, err := net.Dial("tcp", url.Name)
 		if err != nil {
 			c.JSON(200, gin.H{
-				"message": "down",
+				"message": "up",
 			})
 		} else {
 			c.JSON(200, gin.H{
-				"message": "up",
+				"message": "down",
 			})
 		}
 	})

@@ -22,14 +22,14 @@ func main() {
 		// check if url is up
 		var url URL
 		c.BindJSON(&url)
-		_, err := net.Dial("tcp", url.Name)
+		_, err := net.Dial("tcp", url.Name + ":80")
 		if err != nil {
 			c.JSON(200, gin.H{
-				"message": "up",
+				"message": "down",
 			})
 		} else {
 			c.JSON(200, gin.H{
-				"message": "down",
+				"message": "up",
 			})
 		}
 	})

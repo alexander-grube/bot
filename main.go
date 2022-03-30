@@ -1,6 +1,14 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"os"
+
+	"github.com/gin-gonic/gin"
+)
+
+var (
+	PORT string = ":" + os.Getenv("PORT")
+)
 
 func main() {
 	r := gin.Default()
@@ -9,5 +17,5 @@ func main() {
 			"message": "pong",
 		})
 	})
-	r.Run()
+	r.Run(PORT)
 }

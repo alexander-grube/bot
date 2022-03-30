@@ -19,7 +19,7 @@ func main() {
 	r := gin.Default()
 
 	r.POST("/up", func(c *gin.Context) {
-		var url URL
+		url := URL{}
 		c.BindJSON(&url)
 		_, err := net.Dial("tcp", url.Name + ":80")
 		if err != nil {

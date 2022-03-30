@@ -19,7 +19,6 @@ func main() {
 	r := gin.Default()
 
 	r.POST("/up", func(c *gin.Context) {
-		// check if url is up
 		var url URL
 		c.BindJSON(&url)
 		_, err := net.Dial("tcp", url.Name + ":80")

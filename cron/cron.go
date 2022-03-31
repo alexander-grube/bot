@@ -2,7 +2,7 @@ package cron
 
 import (
 	"log"
-	"net"
+	"net/http"
 
 	"github.com/alexander-grube/bot/store"
 )
@@ -23,7 +23,7 @@ func (c *Cron) CheckIfWebsitesAreUp() {
 
 	for _, w := range websites {
 		log.Printf("Checking if %s is up", w.Name)
-		_, err := net.Dial("tcp", w.Name+":80")
+		_, err := http.Get(w.Name)
 		if err != nil {
 			w.Up = false
 			c.store.Update(w)

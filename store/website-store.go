@@ -27,7 +27,7 @@ func (ws *WebsiteStore) Find(name string) (*model.Website, error) {
 
 func (ws *WebsiteStore) FindAll() ([]*model.Website, error) {
 	var websites []*model.Website
-	if err := ws.db.Find(&ws).Error; err != nil {
+	if err := ws.db.Find(&websites).Error; err != nil {
 		return nil, err
 	}
 	return websites, nil

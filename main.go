@@ -33,9 +33,9 @@ func main() {
 
 	cron := cron.NewWebsiteCron(*ws)
 
-	interval := 5 // in minutes
+	interval := 20 // in minutes
 
-	s.Every(interval).Minutes().Do(func() {
+	s.Every(interval).Seconds().Do(func() {
 		fmt.Println("Running Cron every", interval, "minutes")
 		cron.CheckIfWebsitesAreUp()
 	})

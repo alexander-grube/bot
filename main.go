@@ -33,7 +33,7 @@ func main() {
 
 	cron := cron.NewWebsiteCron(*ws)
 
-	s.Every(10).Seconds().Do(func() {
+	s.Every(1).Minute().Do(func() {
 		fmt.Println("Running Cron")
 		cron.CheckIfWebsitesAreUp()
 	})

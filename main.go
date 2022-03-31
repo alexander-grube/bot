@@ -33,7 +33,7 @@ func main() {
 
 	cron := cron.NewWebsiteCron(*ws)
 
-	interval := 5
+	interval := 5 // in minutes
 
 	s.Every(interval).Minutes().Do(func() {
 		fmt.Println("Running Cron every", interval, "minutes")

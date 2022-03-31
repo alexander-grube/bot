@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/alexander-grube/bot/model"
 	"github.com/alexander-grube/bot/store"
 )
 
@@ -23,16 +24,21 @@ func (c *Cron) CheckIfWebsitesAreUp() {
 	}
 
 	for _, w := range websites {
+		uptime := &model.Uptime{}
 		log.Printf("Checking if %s is up", w.Name)
 		start := time.Now()
 		_, err := http.Get(w.Name)
 		if err != nil {
-			w.Up = false
+			uptime.Up = false
+			uptime.Ping = "down"
+			w.Uptime = append(w.Uptime, *uptime)
 			log.Printf("%s is down\n", w.Name)
 			c.store.Update(w)
 			continue
 		}
-		w.Up = true
+		uptime.Up = true
+		uptime.Ping = time.Since(start).String()
+		w.Uptime = append(w.Uptime, *uptime)
 		log.Printf("%s is up in %s\n", w.Name, time.Since(start))
 		c.store.Update(w)
 	}

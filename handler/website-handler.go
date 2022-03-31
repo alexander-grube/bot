@@ -9,7 +9,7 @@ func (h *Handler) CreateWebsiteEntry(c *gin.Context) {
 	r := &WebsiteUpRequest{}
 	w := model.Website{}
 
-	w.Up = true
+	w.Uptime = []model.Uptime{} 
 
 	if err := r.bind(c, &w); err != nil {
 		c.JSON(400, gin.H{

@@ -1,8 +1,6 @@
 package handler
 
 import (
-	"net"
-
 	"github.com/alexander-grube/bot/model"
 	"github.com/gin-gonic/gin"
 )
@@ -18,11 +16,6 @@ func (h *Handler) CreateWebsiteEntry(c *gin.Context) {
 			"message": err.Error(),
 		})
 		return
-	}
-
-	_, err := net.Dial("tcp", w.Name+":80")
-	if err != nil {
-		w.Up = false
 	}
 
 	if err := h.websiteStore.Create(&w); err != nil {

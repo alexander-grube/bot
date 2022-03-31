@@ -3,11 +3,14 @@ package main
 import (
 	"fmt"
 	"os"
+	"time"
 
+	"github.com/alexander-grube/bot/cron"
 	"github.com/alexander-grube/bot/db"
 	"github.com/alexander-grube/bot/handler"
 	"github.com/alexander-grube/bot/store"
 	"github.com/gin-gonic/gin"
+	"github.com/go-co-op/gocron"
 )
 
 var (
@@ -25,6 +28,15 @@ func main() {
 	ws := store.NewWebsiteStore(d)
 
 	h := handler.NewHandler(*ws)
+
+	s := gocron.NewScheduler(time.UTC)
+
+	cron := cron.NewWebsiteCron(*ws)
+
+	s.Every(10).Seconds().Do(func() {
+		fmt.Println("Running Cron")
+		cron.CheckIfWebsitesAreUp()
+	})
 
 	h.RegisterRoutes(r)
 

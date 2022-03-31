@@ -13,15 +13,16 @@ func (h *Handler) CreateWebsiteEntry(c *gin.Context) {
 
 	w.Up = true
 
-	_, err := net.Dial("tcp", r.Name+":80")
-	if err != nil {
-		w.Up = false
-	}
-	if err = r.bind(c, &w); err != nil {
+	if err := r.bind(c, &w); err != nil {
 		c.JSON(400, gin.H{
 			"message": err.Error(),
 		})
 		return
+	}
+
+	_, err := net.Dial("tcp", w.Name+":80")
+	if err != nil {
+		w.Up = false
 	}
 
 	if err := h.websiteStore.Create(&w); err != nil {

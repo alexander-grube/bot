@@ -38,6 +38,8 @@ func main() {
 		cron.CheckIfWebsitesAreUp()
 	})
 
+	s.StartAsync()
+
 	h.RegisterRoutes(r)
 
 	

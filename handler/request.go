@@ -15,7 +15,7 @@ func (r *WebsiteUpRequest) bind(c *gin.Context, w *model.Website) error {
 	if err := c.ShouldBindJSON(&w); err != nil {
 		return err
 	}
-	log.Println("WebsiteUpRequest:", &r.Name)
+	log.Println("WebsiteUpRequest:", r.Name)
 	w.Name = r.Name
 
 	return nil

@@ -9,11 +9,11 @@ import (
 
 func (h *Handler) CreateWebsiteEntry(c *gin.Context) {
 	r := &WebsiteUpRequest{}
-	w := &model.Website{}
+	w := model.Website{}
 
 	w.Up = true
 
-	if err := r.bind(c, w); err != nil {
+	if err := r.bind(c, &w); err != nil {
 		c.JSON(400, gin.H{
 			"message": err.Error(),
 		})
@@ -25,7 +25,7 @@ func (h *Handler) CreateWebsiteEntry(c *gin.Context) {
 		w.Up = false
 	}
 
-	if err := h.websiteStore.Create(w); err != nil {
+	if err := h.websiteStore.Create(&w); err != nil {
 		c.JSON(500, gin.H{
 			"message": err.Error(),
 		})

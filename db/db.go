@@ -18,5 +18,7 @@ func New() *gorm.DB {
 }
 
 func AutoMigrate(db *gorm.DB) {
-	db.AutoMigrate(&model.Website{})
+	db.AutoMigrate(
+		&model.Website{},
+		&model.Uptime{})
 }
